@@ -1,0 +1,316 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  color: #444;
+  transition: background-color 0.3s, color 0.3s;
+}
+body.dark-mode {
+  background-color: #1d1f21;
+  color: #c7c7c7;
+}
+header {
+  background-color: #d32f2f;
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.header-left h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+}
+.theme-toggle,
+.favorite-toggle {
+  background-color: #fff;
+  border: none;
+  padding: 8px 12px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 1.2em;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.theme-toggle {
+  margin-left: 5px;
+}
+.theme-toggle:hover,
+.favorite-toggle:hover {
+  background-color: #eee;
+}
+body.dark-mode .theme-toggle,
+body.dark-mode .favorite-toggle {
+  background-color: #333;
+  color: #fff;
+}
+body.dark-mode .theme-toggle:hover,
+body.dark-mode .favorite-toggle:hover {
+  background-color: #555;
+}
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #d32f2f;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+.character-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.character-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  width: 180px;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
+    background-color 0.3s, color 0.3s;
+}
+body.dark-mode .character-card {
+  background: #2c2c2c;
+  color: #c7c7c7;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.character-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+body.dark-mode .character-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+.character-card img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #eee;
+}
+.character-card h2 {
+  font-size: 1.1em;
+  margin: 5px 0;
+  color: #d32f2f;
+}
+body.dark-mode .character-card h2 {
+  color: #ff5252;
+}
+.character-card p {
+  font-size: 0.9em;
+  margin: 5px;
+  color: #666;
+}
+body.dark-mode .character-card p {
+  color: #aaa;
+}
+.character-status {
+  color: green;
+  font-weight: bold;
+}
+.character-status.dead {
+  color: red;
+}
+.character-status.unknown {
+  color: grey;
+}
+body.dark-mode .character-status {
+  color: lightgreen;
+}
+body.dark-mode .character-status.dead {
+  color: #ff6b6b;
+}
+body.dark-mode .character-status.unknown {
+  color: #888;
+}
+.view-info-btn,
+.favorite-btn,
+.remove-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 5px 5px 5px 0;
+  font-size: 0.9em;
+  color: #fff;
+  background-color: #d32f2f;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+body.dark-mode .view-info-btn,
+body.dark-mode .favorite-btn,
+body.dark-mode .remove-btn {
+  background-color: #ff5252;
+}
+.view-info-btn:hover,
+.favorite-btn:hover,
+.remove-btn:hover {
+  background-color: #b71c1c;
+}
+body.dark-mode .view-info-btn:hover,
+body.dark-mode .favorite-btn:hover,
+body.dark-mode .remove-btn:hover {
+  background-color: #ff4444;
+}
+.right-panel {
+  flex: 1;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  padding: 10px;
+  position: fixed;
+  right: -100%;
+  top: 70px;
+  width: 300px;
+  height: calc(100% - 70px);
+  overflow-y: auto;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+body.dark-mode .right-panel {
+  background-color: #2e2e2e;
+}
+.right-panel.show {
+  right: 0;
+}
+.right-panel h2 {
+  font-size: 1.4em;
+  margin-top: 0;
+  color: #d32f2f;
+}
+body.dark-mode .right-panel h2 {
+  color: #ff5252;
+}
+.right-panel img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.right-panel p {
+  font-size: 0.9em;
+  color: #333;
+  margin: 10px 0;
+}
+body.dark-mode .right-panel p {
+  color: #c7c7c7;
+}
+.modal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+.modal.show {
+  display: flex;
+}
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, color 0.3s;
+}
+.modal-content h2 {
+  margin-top: 0;
+  color: #d32f2f;
+}
+body.dark-mode .modal-content {
+  background-color: #2e2e2e;
+  color: #c7c7c7;
+}
+body.dark-mode .modal-content h2 {
+  color: #ff5252;
+}
+.modal-content .character-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.close-info {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5em;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+}
+.search-box {
+  margin: 0 10px;
+}
+.search-box input {
+  width: 250px;
+  padding: 8px 12px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s,
+    color 0.3s;
+}
+body.dark-mode .search-box input {
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
+}
+body.dark-mode .search-box input::placeholder {
+  color: #bbb;
+}
